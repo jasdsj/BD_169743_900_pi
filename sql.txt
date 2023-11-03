@@ -1,3 +1,5 @@
+1.
+
 1) 
 Create table postac (
     id_postaci int primary key auto_increment,
@@ -67,6 +69,59 @@ create table statek (
     rodzaj ENUM("maly", "duzy"),
     data_wodowania date,
     max_ladownosc int unsigned);
+
+insert into statek values 
+("Pingwin", "maly", "1970-11-11", 5), 
+("Sokol", "duzy", "1965-11-11", 8);
+
+alter table postac add funkcja varchar(45);
+
+update postac set funkcja = "kapitan" where nazwa = "Bjorn";
+
+alter table postac add statek varchar(30);
+alter table postac add  foreign key (statek) references statek(nazwa);
+
+update postac set statek = "Pingwin" where id_postaci < 3;
+update postac set statek = "Pingwin" where id_postaci = 4;
+update postac set statek = "Sokol" where id_postaci > 4;
+
+delete from izba where nazwa_izby = "spizarnia";
+drop table izba;
+
+2.
+
+1)
+delete from postac where nazwa = "Michal" and nazwa = "Pawel";
+
+alter table walizka drop foreign key walizka_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_2;
+alter table postac modify id_postaci int;
+alter table postac drop primary key;
+
+2)
+alter table postac add pesel char(11);
+update postac set pesel = "12345678901" where id_postaci = 1;
+alter table postac add primary key (pesel);
+alter table postac modify column rodzaj ENUM("wiking", "ptak", "kobieta", "syrena");
+insert into postac values (9, "Gertruda Nieszczera", "syrena","1880-01-01", 143, NULL, NULL, "12345678909");
+
+
+
+3)
+update postac set statek = "Pingwin" where nazwa like "%a%";
+
+update statek set max_ladownosc = max_ladownosc * 0.7 where data_wodowania between '1900-01-01' and '1999-12-12';
+
+alter table postac add check (wiek < 1000);
+
+4)
+
+
+
+
+
+
 
 
 
