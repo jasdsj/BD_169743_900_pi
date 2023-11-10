@@ -1,0 +1,87 @@
+1) 
+Create table postac (
+    id_postaci int primary key auto_increment,
+    nazwa varchar(40),
+    rodzaj ENUM("wiking", "ptak", "kobieta"),
+    data_ur date,
+    wiek int unsigned);
+
+
+insert into postac values
+    (1, "Bjorn", "wiking", "1980-01-01", 43),
+    (2, "Drozd", "ptak", "2000-01-01", 23),
+    (3, "Tesciowa", "kobieta", "1935-01-01", 80);
+
+update postac set wiek = 88 where nazwa = "Tesciowa";
+
+2)
+Create table walizka (
+ id_walizki int primary key auto_increment,
+ pojemnosc int unsigned,
+ kolor ENUM("rozowy", "czerwony", "teczowy", "zolty"),
+ id_wlasciciela int,
+ foreign key (id_wlasciciela) references postac(id_postaci) on delete cascade);
+
+alter table walizka alter kolor set default "rozowy";
+
+insert into walizka values
+    (1, 12, "czerwony", 1),
+    (2, 15, "zolty" ,3);
+
+3)
+create table izba (
+ adres_budynku varchar(30),
+ nazwa_izby varchar(30),
+ metraz int unsigned,
+ constraint pk_izba primary key (adres_budynku, nazwa_izby),
+ wlasciciel int,
+ foreign key (wlasciciel) references postac(id_postaci) on delete set NULL);
+
+alter table izba add kolor varchar(15) default "czarny";
+
+insert into izba values ("Morska", "spizarnia", 15, 1, "zolty");
+
+4)
+create table przetwory (
+ id_przetworu int primary key auto_increment,
+ rok_prdukcji year default 1954,
+ id_wykonawcy int, zawarosc varchar(30),
+ dodatek varchar(30) default "papryczka chilli",
+ id_konsumenta int,
+ foreign key (id_wykonawcy) references postac(id_postaci),
+ foreign key (id_konsumenta) references postac(id_postaci));
+
+insert into przetwory values
+ (1, 1970, 1, "bigos", "paprczka chilli", 3);
+
+5)
+insert into postac values 
+ (4, "Piotr", "wiking", "1983-01-01", 40),
+ (5, "Pawel", "wiking", "1981-01-01", 42),
+ (6, "Tomek", "wiking", "1982-01-01", 41),
+ (7, "Lukasz", "wiking", "1983-01-01", 40),
+ (8, "Michal", "wiking", "1980-01-01", 43);
+
+create table statek (
+    nazwa varchar(30) primary key,
+    rodzaj ENUM("maly", "duzy"),
+    data_wodowania date,
+    max_ladownosc int unsigned);
+
+insert into statek values 
+("Pingwin", "maly", "1970-11-11", 5), 
+("Sokol", "duzy", "1965-11-11", 8);
+
+alter table postac add funkcja varchar(45);
+
+update postac set funkcja = "kapitan" where nazwa = "Bjorn";
+
+alter table postac add statek varchar(30);
+alter table postac add  foreign key (statek) references statek(nazwa);
+
+update postac set statek = "Pingwin" where id_postaci < 3;
+update postac set statek = "Pingwin" where id_postaci = 4;
+update postac set statek = "Sokol" where id_postaci > 4;
+
+delete from izba where nazwa_izby = "spizarnia";
+drop table izba;
