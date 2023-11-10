@@ -116,6 +116,72 @@ update statek set max_ladownosc = max_ladownosc * 0.7 where data_wodowania betwe
 alter table postac add check (wiek < 1000);
 
 4)
+alter table postac modify column rodzaj ENUM("wiking", "ptak", "kobieta", "syrena", "waz");
+
+insert into postac values (10, "Waz Loko", "waz","2020-01-01", 3,"" ,"" ,"12345678910");
+
+create table like postac;
+
+insert into marynarz select * from postac where statek is not null;
+
+update marynarz set statek = 'NULL' where statek is not null;
+
+delete from marynarz where nazwa = "Pawel";
+
+delete from statek where max_ladownosc > 0;
+
+drop table statek;
+
+Create table zwierz (
+    id int primary key auto_increment,
+    nazwa varchar(40),
+    wiek int);
+
+insert into zwierz (nazwa, wiek) select nazwa, wiek from postac where rodzaj="ptak" or rodzaj="waz";
+
+3.
+
+1)
+create table kreatura as select * from wikingowie.kreatura;
+
+create table zasob as select * from wikingowie.zasob;
+
+create table ekwipunek as select * from wikingowie.ekwipunek;
+
+select * from zasob;
+
+select * from zasob where rodzaj = 'jedzenie';
+
+select idZasobu, ilosc from zasob  where idZasobu IN (1,3,5);
+
+2)
+select * from kreatura where waga >= 50 and rodzaj != "wiedzma";
+
+select * from zasob where waga between 2 and 5;
+
+select * from kreatura where nazwa  like "%or%" and udzwig between 30 and 70;
+
+3)
+select * from zasob where month(dataPozyskania) in (07,08);
+
+select * from zasob where rodzaj is not null order by waga asc;
+
+select * from kreatura order by dataUr desc Limit 5;
+
+4)
+select distinct rodzaj from zasob;
+
+select concat(rodzaj, '-', nazwa) from kreatura;
+
+select *, concat(ilosc * waga) as "waga calkowita" from zasob where year(dataPozyskania) between 2000 and 2007;
+
+5)
+select *, waga * 0.7 as "waga netto", waga * 0.7 as "odpadki" from zasob where rodzaj = "jedzenie";
+
+select * from zasob where rodzaj is null;
+
+select distinct rodzaj from zasob where nazwa like "Ba%" or "%os";0
+
 
 
 
