@@ -1,0 +1,48 @@
+1)
+delete from postac where nazwa = "Michal" and nazwa = "Pawel";
+
+alter table walizka drop foreign key walizka_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_1;
+alter table przetwory drop foreign key przetwory_ibfk_2;
+alter table postac modify id_postaci int;
+alter table postac drop primary key;
+
+2)
+alter table postac add pesel char(11);
+update postac set pesel = "12345678901" where id_postaci = 1;
+alter table postac add primary key (pesel);
+alter table postac modify column rodzaj ENUM("wiking", "ptak", "kobieta", "syrena");
+insert into postac values (9, "Gertruda Nieszczera", "syrena","1880-01-01", 143, NULL, NULL, "12345678909");
+
+
+
+3)
+update postac set statek = "Pingwin" where nazwa like "%a%";
+
+update statek set max_ladownosc = max_ladownosc * 0.7 where data_wodowania between '1900-01-01' and '1999-12-12';
+
+alter table postac add check (wiek < 1000);
+
+4)
+alter table postac modify column rodzaj ENUM("wiking", "ptak", "kobieta", "syrena", "waz");
+
+insert into postac values (10, "Waz Loko", "waz","2020-01-01", 3,"" ,"" ,"12345678910");
+
+create table like postac;
+
+insert into marynarz select * from postac where statek is not null;
+
+update marynarz set statek = 'NULL' where statek is not null;
+
+delete from marynarz where nazwa = "Pawel";
+
+delete from statek where max_ladownosc > 0;
+
+drop table statek;
+
+Create table zwierz (
+    id int primary key auto_increment,
+    nazwa varchar(40),
+    wiek int);
+
+insert into zwierz (nazwa, wiek) select nazwa, wiek from postac where rodzaj="ptak" or rodzaj="waz";
