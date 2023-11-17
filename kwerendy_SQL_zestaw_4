@@ -1,0 +1,12 @@
+1)
+select avg(waga) from kreatura where rodzaj = "wiking";
+select avg(waga), count(nazwa) from kreatura group by rodzaj;
+select avg(2032-Year(dataUr)) from kreatura;
+
+2)
+select rodzaj, sum(waga) from zasob group by rodzaj;
+select nazwa, avg(waga) from zasob group by nazwa having count(ilosc) >= 4 and avg(waga) > 10;
+select count(distinct nazwa), rodzaj from zasob group by rodzaj having count(nazwa) > 1;
+
+3)
+
