@@ -9,4 +9,10 @@ select nazwa, avg(waga) from zasob group by nazwa having count(ilosc) >= 4 and a
 select count(distinct nazwa), rodzaj from zasob group by rodzaj having count(nazwa) > 1;
 
 3)
+select kreatura.nazwa, count(zasob.nazwa) as iloscZasobu from zasob, kreatura, ekwipunek where kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu= ekwipunek.idZasobu group by kreatura.nazwa;
+select kreatura.nazwa, zasob.nazwa as zasob from zasob, kreatura, ekwipunek where kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu= ekwipunek.idZasobu order by zasob.nazwa;
+select * from kreatura left join ekwipunek on kreatura.idKreatury = ekwipunek.idKreatury where idEkwipunku is NULL;
 
+4)
+select kreatura.nazwa, zasob.nazwa from kreatura join ekwipunek on kreatura.idKreatury= ekwipunek.idKreatury join zasob on zasob.idZasobu = ekwipunek.idZasobu where kreatura.dataUR between '1670-01-01' and '1679-12-31';
+select kreatura.nazwa from kreatura join ekwipunek on kreatura.idKreatury = ekwipunek.idKreatury join zasob on zasob.idZasobu = ekwipunek.idZasobu where zasob.rodzaj='jedzenie' order by kreatura.dataUr DESC limit 5;
