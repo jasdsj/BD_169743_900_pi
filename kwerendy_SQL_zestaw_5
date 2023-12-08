@@ -1,3 +1,9 @@
 1)
-
+create table kreatura as select * from wikingowie.kreatura;
+create table uczestnicy as select * from wikingowie.uczestnicy;
 create table etapy_wyprawy as select * from wikingowie.etapy_wyprawy;
+create table sektor as select * from wikingowie.sektor;
+create table wyprawa as select * from wikingowie.wyprawa;
+
+select distinct kreatura.nazwa from kreatura left outer join uczestnicy  on kreatura.idkreatury = uczestnicy.id_uczestnika where id_wyprawy is null;
+
