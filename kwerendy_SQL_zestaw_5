@@ -7,3 +7,5 @@ create table wyprawa as select * from wikingowie.wyprawa;
 
 select distinct kreatura.nazwa from kreatura left outer join uczestnicy  on kreatura.idkreatury = uczestnicy.id_uczestnika where id_wyprawy is null;
 
+ select wyprawa.nazwa from wyprawa join uczestnicy on wyprawa.id_wyprawy = uczestnicy.id_wyprawy join kreatura on kreatura.idkreatury=uczestnicy.id_uczestnika join ekwipunek on kreatura.idkreatury = ekwipunek.idkreatury; 
+^dokonczyć (1.3)
