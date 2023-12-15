@@ -12,6 +12,6 @@ select wyprawa.nazwa, sum(ekwipunek.ilosc) from wyprawa join uczestnicy on wypra
 2)
 select wyprawa.nazwa, count(uczestnicy.id_uczestnika), group_concat(kreatura.nazwa) from wyprawa join uczestnicy on wyprawa.id_wyprawy = uczestnicy.id_wyprawy join kreatura on kreatura.idkreatury=uczestnicy.id_uczestnika group by wyprawa.nazwa;
 
-select etapy_wyprawy.dziennik, sektor.nazwa, kreatura.nazwa as kierownik from wyprawa join etapy_wyprawy on wyprawa.id_wyprawy=etapy_wyprawy.idwyprawy join sektor on etapy_wyprawy.sektor = sektor.id_sektora join kreatura on wyprawa.kierownik = kreatura.idKreatury order by wyprawa.data_rozpoczecia;
+select etapy_wyprawy.dziennik, sektor.nazwa, kreatura.nazwa as kierownik from wyprawa join etapy_wyprawy on wyprawa.id_wyprawy=etapy_wyprawy.idwyprawy join sektor on etapy_wyprawy.sektor = sektor.id_sektora join kreatura on wyprawa.kierownik = kreatura.idKreatury order by wyprawa.data_rozpoczecia desc;
 
 3)
