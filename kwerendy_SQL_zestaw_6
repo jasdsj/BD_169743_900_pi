@@ -4,4 +4,4 @@ DELIMITER $$ create TRIGGER waga_check BEFORE INSERT ON kreatura FOR EACH ROW BE
 2)
 DELIMITER $$ create trigger del_wyp after delete on wyprawa for each row begin insert into archiwum_wyprawy values (wyprawa.id_wyprawy, wyprawa.nazwa, wyprawa.data_rozpoczecia, wyprawa.data_zakonczenia, kierownik); END; $$
 
-3)
+3) 
